@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/simplelabel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/simplePW"
+        android:textSize="15pt"
+        />
+
+    <EditText
+        android:id="@+id/simpleedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/simplelabel"
+        android:hint="@string/PW"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/pwlabel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/pwedit"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-161dp"
+        android:text="@string/check"
+        android:textSize="14pt" />
+
+    <EditText
+        android:id="@+id/pwedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="161dp"
+        android:hint="@string/PW"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/emaillabel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="222dp"
+        android:text="@string/email"
+        android:textSize="15pt" />
+
+    <EditText
+        android:id="@+id/emailedit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="206dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="104dp"
+        android:layout_marginStart="48dp"
+        android:text="@string/join" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/bt1"
+        android:layout_marginEnd="50dp"
+        android:text="@string/login" />
+
+</RelativeLayout>

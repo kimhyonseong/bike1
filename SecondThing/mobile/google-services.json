@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "697461065041",
+    "firebase_url": "https://secondthing-d29d1.firebaseio.com",
+    "project_id": "secondthing-d29d1",
+    "storage_bucket": "secondthing-d29d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697461065041:android:b1b1738b87882272",
+        "android_client_info": {
+          "package_name": "com.example.kimhyonseong.secondthing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697461065041-mi41icgronskkdin05n3qq755v5ecsdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kimhyonseong.secondthing",
+            "certificate_hash": "5d04a9502ad54022262048d823202abe6428a4b8"
+          }
+        },
+        {
+          "client_id": "697461065041-c6poubh5n3t3ma8v1oslrjjo2ushjjg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4y8OKtwooNff0HrXq_JDQqo8HKsyZKnM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697461065041-c6poubh5n3t3ma8v1oslrjjo2ushjjg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

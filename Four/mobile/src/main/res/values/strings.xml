@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Four</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="show_all_apps" tools:ignore="MissingTranslation">All</string>
+</resources>

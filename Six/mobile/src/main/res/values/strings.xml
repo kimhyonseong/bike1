@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Six</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="todo">TODO</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="title_activity_gps_info">Map</string>
+    <string name="title_activity_maps3">Map</string>
+</resources>
