@@ -30,20 +30,27 @@ public class findpw extends AppCompatActivity {
 
         Button B1 = findViewById(R.id.ok);
         Button B2 = findViewById(R.id.backk);
-        final EditText E1 = findViewById(R.id.email);
 
         B1.setOnClickListener(new View.OnClickListener() {
-            String E = E1.getText().toString();
             @Override
             public void onClick(View view) {
+                final EditText E1 = findViewById(R.id.email);
+                final String E = E1.getText().toString();
+
                 DB1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot DS : dataSnapshot.getChildren()){
-                            String em =(String)DS.child("E-mail").getValue();
+                            String em = (String)DS.child("E-mail").getValue();
+                            String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Toast.makeText(getApplicationContext(),"1번 자리 "+em,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"1번 자리 "+password,Toast.LENGTH_SHORT).show();
+                                Intent email = new Intent(Intent.ACTION_SEND);
+                                email.setType("plain/text");
+                                email.putExtra(Intent.EXTRA_EMAIL,em);
+                                email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
+                                email.putExtra(Intent.EXTRA_TEXT,"고객님의 비밀번호는 "+password+" 입니다.");
                                 return;
                             }
                         }
@@ -54,14 +61,16 @@ public class findpw extends AppCompatActivity {
 
                     }
                 });
+
                 DB2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot DS : dataSnapshot.getChildren()){
-                            String em =(String)DS.child("E-mail").getValue();
+                            String em = (String)DS.child("E-mail").getValue();
+                            String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Toast.makeText(getApplicationContext(),"2번 자리 "+em,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"2번 자리 "+password,Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -71,14 +80,16 @@ public class findpw extends AppCompatActivity {
 
                     }
                 });
+
                 DB3.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot DS : dataSnapshot.getChildren()){
-                            String em =(String)DS.child("E-mail").getValue();
+                            String em = (String)DS.child("E-mail").getValue();
+                            String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Toast.makeText(getApplicationContext(),"3번 자리 "+em,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"3번 자리 "+password,Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }

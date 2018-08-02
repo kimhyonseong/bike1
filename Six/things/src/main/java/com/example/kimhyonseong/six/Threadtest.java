@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.things.pio.PeripheralManager;
@@ -25,22 +24,22 @@ public class Threadtest extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ted);
 
-        PeripheralManager manager = PeripheralManager.getInstance();  //이거 잇으면 가상기기로 못돌림
+        //PeripheralManager manager = PeripheralManager.getInstance();  //이거 잇으면 가상기기로 못돌림
 
-        if (manager.getGpioList().isEmpty()) {
+/*        if (manager.getGpioList().isEmpty()) {
             Log.i("없데", "사용할 핀 없음");
         } else {
             Log.i("있데", "List : " + manager.getGpioList());  //Logcat에서 확인가능
         }
-
+*/
         Body body = new Body();
-        Motor1 m1 = new Motor1();
-        Motor2 m2 = new Motor2();
+        //Motor1 m1 = new Motor1();
+        //Motor2 m2 = new Motor2();
         Motor3 m3 = new Motor3();
 
         body.start();
-        m1.start();
-        m2.start();
+        //m1.start();
+        //m2.start();
         m3.start();
     }
 }
@@ -56,13 +55,16 @@ class Body extends Thread{  //인체감지센서 및 LED
             LED.setActiveType(Gpio.ACTIVE_LOW);
             Gpio body = manager.openGpio("BCM3");
             body.setDirection(Gpio.DIRECTION_IN);
-            body.setActiveType(Gpio.ACTIVE_LOW);
+            //body.setActiveType(Gpio.ACTIVE_LOW);
 
             while (true){
-                if (body.getValue()){
-                    LED.setValue(true);
-                }
-                else LED.setValue(false);
+                //if (body.getValue()){
+                //    LED.setValue(true);
+                //}
+                //else LED.setValue(false);
+                LED.setValue(true);
+                Thread.sleep(1000);
+                LED.setValue(false);
                 Thread.sleep(1000);
             }
         } catch (IOException | InterruptedException e) {
@@ -70,6 +72,7 @@ class Body extends Thread{  //인체감지센서 및 LED
         }
     }
 }
+/*
 class Motor1 extends Thread{  //1번 모터
 
     private FirebaseDatabase Fbase = FirebaseDatabase.getInstance();
@@ -178,7 +181,7 @@ class Motor1 extends Thread{  //1번 모터
                                 mot14.setValue(false);
                                 Thread.sleep(1);
 
-                                mot11.setValue(true);
+                                mot11.setValue(false);
                                 mot12.setValue(false);
                                 mot13.setValue(false);
                                 mot14.setValue(true);
@@ -219,7 +222,7 @@ class Motor2 extends Thread{  //2번 모터
                 for (DataSnapshot DB : dataSnapshot.getChildren()) {
                     String state = (String) DB.child("state").getValue();
 
-                    if (state.equals("open")) {
+                    if ("open".equals(state)) {
                         try {
                             mot21 = manager.openGpio("BCM10");  //핀설정
                             mot21.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);  //초기값 설정
@@ -272,7 +275,7 @@ class Motor2 extends Thread{  //2번 모터
                         } catch (IOException | InterruptedException e) {
                             e.printStackTrace();
                         }
-                    } else if (state.equals("lock")) {
+                    } else if ("lock".equals(state)) {
                         try {
                             mot21 = manager.openGpio("BCM4");  //핀설정
                             mot21.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);  //초기값 설정
@@ -335,7 +338,7 @@ class Motor2 extends Thread{  //2번 모터
         });
     }
 }
-
+*/
 class Motor3 extends Thread {  //3번 모터
 
     private FirebaseDatabase Fbase = FirebaseDatabase.getInstance();
@@ -355,16 +358,16 @@ class Motor3 extends Thread {  //3번 모터
                     if ("open".equals(State)) {
 
                         try {
-                            mot31 = manager.openGpio("BCM6");  //핀설정
+                            mot31 = manager.openGpio("BCM12");  //핀설정
                             mot31.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);  //인풋 아웃풋 설정
                             mot31.setActiveType(Gpio.ACTIVE_HIGH);  //초기값 설정
-                            mot32 = manager.openGpio("BCM13");
+                            mot32 = manager.openGpio("BCM16");
                             mot32.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
                             mot32.setActiveType(Gpio.ACTIVE_HIGH);
-                            mot33 = manager.openGpio("BCM19");
+                            mot33 = manager.openGpio("BCM20");
                             mot33.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
                             mot33.setActiveType(Gpio.ACTIVE_HIGH);
-                            mot34 = manager.openGpio("BCM26");
+                            mot34 = manager.openGpio("BCM21");
                             mot34.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
                             mot34.setActiveType(Gpio.ACTIVE_HIGH);
 

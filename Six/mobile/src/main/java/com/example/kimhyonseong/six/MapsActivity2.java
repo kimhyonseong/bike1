@@ -53,7 +53,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        boxMap = (RelativeLayout)findViewById(R.id.boxMap);
+        //boxMap = (RelativeLayout)findViewById(R.id.boxMap);
 
         //LocationManager
         locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
