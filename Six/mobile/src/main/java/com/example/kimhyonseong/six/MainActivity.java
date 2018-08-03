@@ -17,9 +17,6 @@ import br.com.bloder.magic.view.MagicButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseDatabase Fbase = FirebaseDatabase.getInstance();
-    DatabaseReference DB4 = Fbase.getReference("kim");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         final MagicButton entrust = findViewById(R.id.lockB);
         MagicButton getback = findViewById(R.id.openB);
-        MagicButton tst = findViewById(R.id.mapB);
+        MagicButton map = findViewById(R.id.mapB);
 
         entrust.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
@@ -45,31 +42,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tst.setMagicButtonClickListener(new View.OnClickListener(){
+        map.setMagicButtonClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                 Intent map = new Intent(getApplicationContext(),MapsActivity.class);
-                 startActivity(map);
-                 finish();
+                MainActivity.super.onBackPressed();  //뒤로가기
             }
         });
-
-        /*
-        DB4.addValueEventListener(new ValueEventListener() {  //보관소 남은 자리
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot DS : dataSnapshot.getChildren()){
-                    String sit = (String)DS.child("rest").getValue();
-
-                    if ("0".equals(sit)) entrust.setEnabled(false);
-                    else entrust.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
     }
 }

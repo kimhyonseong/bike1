@@ -51,6 +51,7 @@ public class findpw extends AppCompatActivity {
                                 email.putExtra(Intent.EXTRA_EMAIL,em);
                                 email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
                                 email.putExtra(Intent.EXTRA_TEXT,"고객님의 비밀번호는 "+password+" 입니다.");
+                                startActivity(email);
                                 return;
                             }
                         }
@@ -99,6 +100,7 @@ public class findpw extends AppCompatActivity {
 
                     }
                 });
+                Toast.makeText(getApplicationContext(),"비밀번호는 이메일로 보내드렸습니다.",Toast.LENGTH_SHORT).show();
             }
         });
 
