@@ -84,58 +84,56 @@ public class entrust extends AppCompatActivity {
                 String checkpw = check.getText().toString();
                 String email = Email.getText().toString();
 
-                if (pw.isEmpty()&&checkpw.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"비밀번호와 비밀번호를 입력해주세요.",Toast.LENGTH_SHORT).show();
-                }
+                int id = Rad.getCheckedRadioButtonId();
+                RadioButton rb = findViewById(id);
 
-                else if(pw.equals(checkpw)) {
-                    int id = Rad.getCheckedRadioButtonId();
-                    RadioButton rb = findViewById(id);
+                if (id==-1) Toast.makeText(getApplicationContext(),"먼저 자전거 자리를 선택해주세요!",Toast.LENGTH_SHORT).show();
+
+                else {
                     String number = rb.getText().toString();
 
-                    if(number.equals("1")) {
-                        DB1.child("user1").child("state").setValue("lock");
-                        DB1.child("user1").child("password").setValue(pw);
-                        DB1.child("user1").child("E-mail").setValue(email);
-                        DB4.child("/Sit/num1").setValue("lock");
-                        Toast.makeText(getApplicationContext(),"자전거가 보관되었습니다.",Toast.LENGTH_SHORT).show();
-                        Intent main = new Intent(getApplicationContext(),MapsActivity.class);
-                        startActivity(main);
-                        finish();
-                    }
+                    if (pw.isEmpty() && checkpw.isEmpty())
+                        Toast.makeText(getApplicationContext(), "비밀번호와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    else if (pw.isEmpty())
+                        Toast.makeText(getApplicationContext(), "비밀번호를 입력하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    else if (checkpw.isEmpty())
+                        Toast.makeText(getApplicationContext(), "비밀번호 확인을 하시지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    else if (!pw.equals(checkpw))
+                        Toast.makeText(getApplicationContext(), "비밀번호와 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    else if (email.isEmpty())
+                        Toast.makeText(getApplicationContext(), "E-mail은 비밀번호를 찾기 위해 꼭 필요합니다!!", Toast.LENGTH_SHORT).show();
 
-                    else if(number.equals("2")) {
-                        DB2.child("banana").child("state").setValue("lock");
-                        DB2.child("banana").child("password").setValue(pw);
-                        DB2.child("banana").child("E-mail").setValue(email);
-                        DB4.child("/Sit/num2").setValue("lock");
-                        Toast.makeText(getApplicationContext(),"자전거가 보관되었습니다.",Toast.LENGTH_SHORT).show();
-                        Intent main = new Intent(getApplicationContext(),MapsActivity.class);
-                        startActivity(main);
-                        finish();
-                    }
-
-                    else if(number.equals("3")) {
-                        DB3.child("tost").child("state").setValue("lock");
-                        DB3.child("tost").child("password").setValue(pw);
-                        DB3.child("tost").child("E-mail").setValue(email);
-                        DB4.child("/Sit/num3").setValue("lock");
-                        Toast.makeText(getApplicationContext(),"자전거가 보관되었습니다.",Toast.LENGTH_SHORT).show();
-                        Intent main = new Intent(getApplicationContext(),MapsActivity.class);
-                        startActivity(main);
-                        finish();
+                    else if (pw.equals(checkpw)) {
+                        if (number.equals("1")) {
+                            DB1.child("user1").child("state").setValue("lock");
+                            DB1.child("user1").child("password").setValue(pw);
+                            DB1.child("user1").child("E-mail").setValue(email);
+                            DB4.child("/Sit/num1").setValue("lock");
+                            Toast.makeText(getApplicationContext(), "자전거가 보관되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent main = new Intent(getApplicationContext(), MapsActivity.class);
+                            startActivity(main);
+                            finish();
+                        } else if (number.equals("2")) {
+                            DB2.child("banana").child("state").setValue("lock");
+                            DB2.child("banana").child("password").setValue(pw);
+                            DB2.child("banana").child("E-mail").setValue(email);
+                            DB4.child("/Sit/num2").setValue("lock");
+                            Toast.makeText(getApplicationContext(), "자전거가 보관되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent main = new Intent(getApplicationContext(), MapsActivity.class);
+                            startActivity(main);
+                            finish();
+                        } else if (number.equals("3")) {
+                            DB3.child("tost").child("state").setValue("lock");
+                            DB3.child("tost").child("password").setValue(pw);
+                            DB3.child("tost").child("E-mail").setValue(email);
+                            DB4.child("/Sit/num3").setValue("lock");
+                            Toast.makeText(getApplicationContext(), "자전거가 보관되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent main = new Intent(getApplicationContext(), MapsActivity.class);
+                            startActivity(main);
+                            finish();
+                        }
                     }
                 }
-
-                else if (pw.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"비밀번호를 입력하지 않았습니다.",Toast.LENGTH_SHORT).show();
-                }
-
-                else if(checkpw.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"비밀번호 확인을 하시지 않았습니다.",Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(getApplicationContext(),"비밀번호와 비밀번호 확인이 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
             }
         });
     }

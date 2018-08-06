@@ -56,94 +56,98 @@ public class newGetback extends AppCompatActivity {
                 final String password = pw.getText().toString();
                 final int id = Rd.getCheckedRadioButtonId();
                 final RadioButton rb = findViewById(id);
-                final String number = rb.getText().toString();
 
-                if (password.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(),"비밀번호를 입력해주세요!",Toast.LENGTH_SHORT).show();
-                }
+                if (id == -1)
+                    Toast.makeText(getApplicationContext(), "자리를 먼저 선택해주세요!", Toast.LENGTH_SHORT).show();
 
-                else if(number.equals("1")){
-                    DB1.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot MSnapshot : dataSnapshot.getChildren()){  //데이터를 가져와서 읽는(이해를 못하고 쓰는중)
-                                String Pword = (String) MSnapshot.child("password").getValue();
+                else {
+                    final String number = rb.getText().toString();
 
-                                if (password.equals(Pword)){
-                                    Toast.makeText(getApplicationContext(),"잠금해제!!",Toast.LENGTH_SHORT).show();
-                                    DB1.child("user1").child("state").setValue("open");
-                                    DB1.child("user1").child("password").removeValue();
-                                    DB1.child("/user1/E-mail").removeValue();
-                                    DB4.child("/Sit/num1").setValue("open");
-                                    Intent main = new Intent(getApplicationContext(),MapsActivity.class);
-                                    startActivity(main);
-                                    finish();
-                                    return;
+                    if (password.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    } else if (number.equals("1")) {
+                        DB1.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot MSnapshot : dataSnapshot.getChildren()) {
+                                    String Pword = (String) MSnapshot.child("password").getValue();
+
+                                    if (password.equals(Pword)) {
+                                        Toast.makeText(getApplicationContext(), "잠금해제!!", Toast.LENGTH_SHORT).show();
+                                        DB1.child("user1").child("state").setValue("open");
+                                        DB1.child("user1").child("password").removeValue();
+                                        DB1.child("/user1/E-mail").removeValue();
+                                        DB4.child("/Sit/num1").setValue("open");
+                                        Intent main = new Intent(getApplicationContext(), MapsActivity.class);
+                                        startActivity(main);
+                                        finish();
+                                        return;
+                                    }
                                 }
+                                Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다...", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(getApplicationContext(),"비밀번호가 일치하지 않습니다...",Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
-                }
-                else if(number.equals("2")){
-                    DB2.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot MSnapshot : dataSnapshot.getChildren()){  //데이터를 가져와서 읽는(이해를 못하고 쓰는중)
-                                String Pword = (String) MSnapshot.child("password").getValue();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                if (password.equals(Pword)){
-                                    Toast.makeText(getApplicationContext(),"잠금 해제!!",Toast.LENGTH_SHORT).show();
-                                    DB2.child("/banana/password").removeValue();
-                                    DB2.child("/banana/E-mail").removeValue();
-                                    DB2.child("/banana/state").setValue("open");
-                                    DB4.child("/Sit/num2").setValue("open");
-                                    Intent main = new Intent(getApplicationContext(),MapsActivity.class);
-                                    startActivity(main);
-                                    finish();
-                                    return;
+                            }
+                        });
+                    } else if (number.equals("2")) {
+                        DB2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot MSnapshot : dataSnapshot.getChildren()) {
+                                    String Pword = (String) MSnapshot.child("password").getValue();
+
+                                    if (password.equals(Pword)) {
+                                        Toast.makeText(getApplicationContext(), "잠금 해제!!", Toast.LENGTH_SHORT).show();
+                                        DB2.child("/banana/password").removeValue();
+                                        DB2.child("/banana/E-mail").removeValue();
+                                        DB2.child("/banana/state").setValue("open");
+                                        DB4.child("/Sit/num2").setValue("open");
+                                        Intent main = new Intent(getApplicationContext(), MapsActivity.class);
+                                        startActivity(main);
+                                        finish();
+                                        return;
+                                    }
                                 }
+                                Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다...", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(getApplicationContext(),"비밀번호가 일치하지 않습니다...",Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
-                }
-                else if(number.equals("3")){
-                    DB3.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            for (DataSnapshot MSnapshot : dataSnapshot.getChildren()){  //데이터를 가져와서 읽는(이해를 못하고 쓰는중)
-                                String Pword = (String) MSnapshot.child("password").getValue();
+                            }
+                        });
+                    } else if (number.equals("3")) {
+                        DB3.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                if (password.equals(Pword)){
-                                    Toast.makeText(getApplicationContext(),"잠금 해제!!",Toast.LENGTH_SHORT).show();
-                                    DB3.child("/tost/password").removeValue();
-                                    DB3.child("/tost/E-mail").removeValue();
-                                    DB3.child("/tost/state").setValue("open");
-                                    DB4.child("/Sit/num3").setValue("open");
-                                    Intent main = new Intent(getApplicationContext(),MapsActivity.class);
-                                    startActivity(main);
-                                    finish();
-                                    return;
+                                for (DataSnapshot MSnapshot : dataSnapshot.getChildren()) {
+                                    String Pword = (String) MSnapshot.child("password").getValue();
+
+                                    if (password.equals(Pword)) {
+                                        Toast.makeText(getApplicationContext(), "잠금 해제!!", Toast.LENGTH_SHORT).show();
+                                        DB3.child("/tost/password").removeValue();
+                                        DB3.child("/tost/E-mail").removeValue();
+                                        DB3.child("/tost/state").setValue("open");
+                                        DB4.child("/Sit/num3").setValue("open");
+                                        Intent main = new Intent(getApplicationContext(), MapsActivity.class);
+                                        startActivity(main);
+                                        finish();
+                                        return;
+                                    }
                                 }
+                                Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다...", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(getApplicationContext(),"비밀번호가 일치하지 않습니다...",Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                 }
             }
         });

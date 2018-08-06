@@ -45,12 +45,11 @@ public class findpw extends AppCompatActivity {
                             String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Toast.makeText(getApplicationContext(),"1번 자리 "+password,Toast.LENGTH_SHORT).show();
                                 Intent email = new Intent(Intent.ACTION_SEND);
                                 email.setType("plain/text");
                                 email.putExtra(Intent.EXTRA_EMAIL,em);
                                 email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
-                                email.putExtra(Intent.EXTRA_TEXT,"고객님의 비밀번호는 "+password+" 입니다.");
+                                email.putExtra(Intent.EXTRA_TEXT,"1번 자리 고객님의 비밀번호는 "+password+" 입니다.");
                                 startActivity(email);
                                 return;
                             }
@@ -71,7 +70,12 @@ public class findpw extends AppCompatActivity {
                             String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Toast.makeText(getApplicationContext(),"2번 자리 "+password,Toast.LENGTH_SHORT).show();
+                                Intent email = new Intent(Intent.ACTION_SEND);
+                                email.setType("plain/text");
+                                email.putExtra(Intent.EXTRA_EMAIL,em);
+                                email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
+                                email.putExtra(Intent.EXTRA_TEXT,"2번 자리 고객님의 비밀번호는 "+password+" 입니다.");
+                                startActivity(email);
                                 return;
                             }
                         }
@@ -90,7 +94,12 @@ public class findpw extends AppCompatActivity {
                             String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Toast.makeText(getApplicationContext(),"3번 자리 "+password,Toast.LENGTH_SHORT).show();
+                                Intent email = new Intent(Intent.ACTION_SEND);
+                                email.setType("plain/text");
+                                email.putExtra(Intent.EXTRA_EMAIL,em);
+                                email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
+                                email.putExtra(Intent.EXTRA_TEXT,"3번 자리 고객님의 비밀번호는 "+password+" 입니다.");
+                                startActivity(email);
                                 return;
                             }
                         }
@@ -107,9 +116,7 @@ public class findpw extends AppCompatActivity {
         B2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
-                finish();
+                findpw.super.onBackPressed();
             }
         });
     }
