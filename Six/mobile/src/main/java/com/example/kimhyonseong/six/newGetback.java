@@ -101,9 +101,9 @@ public class newGetback extends AppCompatActivity {
 
                                     if (password.equals(Pword)) {
                                         Toast.makeText(getApplicationContext(), "잠금 해제!!", Toast.LENGTH_SHORT).show();
+                                        DB2.child("banana").child("state").setValue("open");
                                         DB2.child("/banana/password").removeValue();
                                         DB2.child("/banana/E-mail").removeValue();
-                                        DB2.child("/banana/state").setValue("open");
                                         DB4.child("/Sit/num2").setValue("open");
                                         Intent main = new Intent(getApplicationContext(), MapsActivity.class);
                                         startActivity(main);
@@ -129,9 +129,9 @@ public class newGetback extends AppCompatActivity {
 
                                     if (password.equals(Pword)) {
                                         Toast.makeText(getApplicationContext(), "잠금 해제!!", Toast.LENGTH_SHORT).show();
+                                        DB3.child("tost").child("state").setValue("open");
                                         DB3.child("/tost/password").removeValue();
                                         DB3.child("/tost/E-mail").removeValue();
-                                        DB3.child("/tost/state").setValue("open");
                                         DB4.child("/Sit/num3").setValue("open");
                                         Intent main = new Intent(getApplicationContext(), MapsActivity.class);
                                         startActivity(main);

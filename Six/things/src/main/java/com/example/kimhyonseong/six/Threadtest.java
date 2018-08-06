@@ -133,6 +133,7 @@ class Motor1 extends Thread{  //1번 모터
                                 mot14.setValue(true);
                                 Thread.sleep(1);
                             }
+                            mot14.setValue(false);
                             mot11.close();  //핀 사용 끝냄 -> 이거 없으면 트라이 다시 들어올때 이미 사용중이라고 에러뜸
                             mot12.close();  //finally에 놓으면 try에 놓으라고 에러뜸
                             mot13.close();
@@ -181,12 +182,13 @@ class Motor1 extends Thread{  //1번 모터
                                 mot14.setValue(false);
                                 Thread.sleep(1);
 
-                                mot11.setValue(false);
+                                mot11.setValue(true);
                                 mot12.setValue(false);
                                 mot13.setValue(false);
-                                mot14.setValue(true);
+                                mot14.setValue(false);
                                 Thread.sleep(1);
                             }
+                            mot11.setValue(false);
                             mot11.close();  //핀 사용 끝냄 -> 이거 없으면 트라이 다시 들어올때 이미 사용중이라고 에러뜸
                             mot12.close();  //finally에 놓으면 try에 놓으라고 에러뜸
                             mot13.close();
@@ -222,7 +224,7 @@ class Motor2 extends Thread{  //2번 모터
                 for (DataSnapshot DB : dataSnapshot.getChildren()) {
                     String state = (String) DB.child("state").getValue();
 
-                    if ("open".equals(state)) {
+                    if (state.equals("open")) {
                         try {
                             mot21 = manager.openGpio("BCM5");  //핀설정
                             mot21.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);  //초기값 설정
@@ -267,6 +269,8 @@ class Motor2 extends Thread{  //2번 모터
                                 mot24.setValue(true);
                                 Thread.sleep(1);
                             }
+                            mot24.setValue(false);
+
                             mot21.close();  //핀 사용 끝냄 -> 이거 없으면 트라이 다시 들어올때 이미 사용중이라고 에러뜸
                             mot22.close();  //finally에 놓으면 try에 놓으라고 에러뜸
                             mot23.close();
@@ -275,7 +279,7 @@ class Motor2 extends Thread{  //2번 모터
                         } catch (IOException | InterruptedException e) {
                             e.printStackTrace();
                         }
-                    } else if ("lock".equals(state)) {
+                    } else if (state.equals("lock")) {
                         try {
                             mot21 = manager.openGpio("BCM5");  //핀설정
                             mot21.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);  //초기값 설정
@@ -317,9 +321,10 @@ class Motor2 extends Thread{  //2번 모터
                                 mot21.setValue(true);
                                 mot22.setValue(false);
                                 mot23.setValue(false);
-                                mot24.setValue(true);
+                                mot24.setValue(false);
                                 Thread.sleep(1);
                             }
+                            mot21.setValue(false);
                             mot21.close();  //핀 사용 끝냄 -> 이거 없으면 트라이 다시 들어올때 이미 사용중이라고 에러뜸
                             mot22.close();  //finally에 놓으면 try에 놓으라고 에러뜸
                             mot23.close();
@@ -355,7 +360,7 @@ class Motor3 extends Thread {  //3번 모터
                 for (DataSnapshot Sinal : dataSnapshot.getChildren()) {
                     String State = (String) Sinal.child("state").getValue();
 
-                    if ("open".equals(State)) {
+                    if (State.equals("open")) {
 
                         try {
                             mot31 = manager.openGpio("BCM18");  //핀설정
@@ -401,6 +406,7 @@ class Motor3 extends Thread {  //3번 모터
                                 mot34.setValue(true);
                                 SystemClock.sleep(1);
                             }
+                            mot34.setValue(false);
                             mot31.close();  //핀 사용 끝냄 -> 이거 없으면 트라이 다시 들어올때 이미 사용중이라고 에러뜸
                             mot32.close();  //finally에 놓으면 try에 놓으라고 에러뜸
                             mot33.close();
@@ -408,7 +414,7 @@ class Motor3 extends Thread {  //3번 모터
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else if ("lock".equals(State)) {
+                    } else if (State.equals("lock")) {
                         try {
                             mot31 = manager.openGpio("BCM18");
                             mot31.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
@@ -454,6 +460,7 @@ class Motor3 extends Thread {  //3번 모터
                                 mot34.setValue(false);
                                 SystemClock.sleep(1);
                             }
+                            mot31.setValue(false);
                             mot31.close();  //핀 사용 끝냄 -> 이거 없으면 트라이 다시 들어올때 이미 사용중이라고 에러뜸
                             mot32.close();  //이거 finally에 넣으면 try로 옮기라고 뜸
                             mot33.close();

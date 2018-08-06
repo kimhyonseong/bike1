@@ -10,17 +10,17 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="189dp"
-        android:hint="이메일 입력"
+        android:layout_marginTop="146dp"
+        android:hint="E-mail"
         android:inputType="textEmailAddress" />
 
     <Button
         android:id="@+id/ok"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="247dp"
+        android:layout_marginTop="223dp"
         android:text="확인" />
 
     <Button
@@ -29,9 +29,17 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="229dp"
         android:text="돌아가기" />
 
+    <TextView
+        android:id="@+id/warnning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="180dp"
+        android:text="* 이메일이 다르면 " />
 
 
 </RelativeLayout>

@@ -22,16 +22,17 @@ public class findpw extends AppCompatActivity {
     DatabaseReference DB1 = Fbase.getReference("oe");
     DatabaseReference DB2 = Fbase.getReference("user1");
     DatabaseReference DB3 = Fbase.getReference("ko");
+    DatabaseReference DB4 = Fbase.getReference("kim");
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.findpw);
 
-        Button B1 = findViewById(R.id.ok);
+        Button ok = findViewById(R.id.ok);
         Button B2 = findViewById(R.id.backk);
 
-        B1.setOnClickListener(new View.OnClickListener() {
+        ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final EditText E1 = findViewById(R.id.email);
@@ -45,15 +46,11 @@ public class findpw extends AppCompatActivity {
                             String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Intent email = new Intent(Intent.ACTION_SEND);
-                                email.setType("plain/text");
-                                email.putExtra(Intent.EXTRA_EMAIL,em);
-                                email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
-                                email.putExtra(Intent.EXTRA_TEXT,"1번 자리 고객님의 비밀번호는 "+password+" 입니다.");
-                                startActivity(email);
+                                Toast.makeText(getApplicationContext(),"1번자리, 비밀번호는 "+password+" 입니다.",Toast.LENGTH_SHORT).show();
+                                findpw.super.onBackPressed();
                                 return;
                             }
-                        }
+                        }DB4.child("/Sit/email1").setValue("No");
                     }
 
                     @Override
@@ -70,15 +67,11 @@ public class findpw extends AppCompatActivity {
                             String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Intent email = new Intent(Intent.ACTION_SEND);
-                                email.setType("plain/text");
-                                email.putExtra(Intent.EXTRA_EMAIL,em);
-                                email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
-                                email.putExtra(Intent.EXTRA_TEXT,"2번 자리 고객님의 비밀번호는 "+password+" 입니다.");
-                                startActivity(email);
+                                Toast.makeText(getApplicationContext(),"2번자리, 비밀번호는 "+password+" 입니다.",Toast.LENGTH_SHORT).show();
+                                findpw.super.onBackPressed();
                                 return;
                             }
-                        }
+                        }DB4.child("/Sit/email2").setValue("No");
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -94,22 +87,40 @@ public class findpw extends AppCompatActivity {
                             String password = (String)DS.child("password").getValue();
 
                             if (E.equals(em)){
-                                Intent email = new Intent(Intent.ACTION_SEND);
-                                email.setType("plain/text");
-                                email.putExtra(Intent.EXTRA_EMAIL,em);
-                                email.putExtra(Intent.EXTRA_SUBJECT,"안녕하세요! 자전거 보관소입니다!!");
-                                email.putExtra(Intent.EXTRA_TEXT,"3번 자리 고객님의 비밀번호는 "+password+" 입니다.");
-                                startActivity(email);
+                                Toast.makeText(getApplicationContext(),"비밀번호는 "+password+" 입니다.",Toast.LENGTH_SHORT).show();
+                                findpw.super.onBackPressed();
                                 return;
                             }
-                        }
+                        }DB4.child("/Sit/email3").setValue("No");
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
-                Toast.makeText(getApplicationContext(),"비밀번호는 이메일로 보내드렸습니다.",Toast.LENGTH_SHORT).show();
+                DB4.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int i=0;
+                        for (DataSnapshot DB : dataSnapshot.getChildren()){
+                            String e1 = (String)DB.child("email1").getValue();
+                            String e2 = (String)DB.child("email2").getValue();
+                            String e3 = (String)DB.child("email3").getValue();
+
+                            if ("No".equals(e1)) ++i;
+                            if ("No".equals(e2)) ++i;
+                            if ("No".equals(e3)) ++i;
+                        }
+                        if (i==3) Toast.makeText(getApplicationContext(),"일치하는 이메일이 없습니다.",Toast.LENGTH_SHORT).show();
+                        DB4.child("/Sit/email1").removeValue();
+                        DB4.child("/Sit/email2").removeValue();
+                        DB4.child("/Sit/email3").removeValue();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -117,6 +128,7 @@ public class findpw extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 findpw.super.onBackPressed();
+                finish();
             }
         });
     }
