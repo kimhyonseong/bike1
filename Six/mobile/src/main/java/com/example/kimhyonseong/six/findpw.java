@@ -2,6 +2,7 @@ package com.example.kimhyonseong.six;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -38,7 +39,7 @@ public class findpw extends AppCompatActivity {
                 final EditText E1 = findViewById(R.id.email);
                 final String E = E1.getText().toString();
 
-                DB1.addValueEventListener(new ValueEventListener() {
+                DB1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot DS : dataSnapshot.getChildren()){
@@ -47,10 +48,14 @@ public class findpw extends AppCompatActivity {
 
                             if (E.equals(em)){
                                 Toast.makeText(getApplicationContext(),"1번자리, 비밀번호는 "+password+" 입니다.",Toast.LENGTH_SHORT).show();
+                                DB4.child("/Sit/email1").removeValue();
+                                DB4.child("/Sit/email2").removeValue();
+                                DB4.child("/Sit/email3").removeValue();
                                 findpw.super.onBackPressed();
                                 return;
                             }
                         }DB4.child("/Sit/email1").setValue("No");
+                        SystemClock.sleep(1);
                     }
 
                     @Override
@@ -59,7 +64,7 @@ public class findpw extends AppCompatActivity {
                     }
                 });
 
-                DB2.addValueEventListener(new ValueEventListener() {
+                DB2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot DS : dataSnapshot.getChildren()){
@@ -68,10 +73,14 @@ public class findpw extends AppCompatActivity {
 
                             if (E.equals(em)){
                                 Toast.makeText(getApplicationContext(),"2번자리, 비밀번호는 "+password+" 입니다.",Toast.LENGTH_SHORT).show();
+                                DB4.child("/Sit/email1").removeValue();
+                                DB4.child("/Sit/email2").removeValue();
+                                DB4.child("/Sit/email3").removeValue();
                                 findpw.super.onBackPressed();
                                 return;
                             }
                         }DB4.child("/Sit/email2").setValue("No");
+                        SystemClock.sleep(1);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -79,7 +88,7 @@ public class findpw extends AppCompatActivity {
                     }
                 });
 
-                DB3.addValueEventListener(new ValueEventListener() {
+                DB3.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot DS : dataSnapshot.getChildren()){
@@ -88,10 +97,15 @@ public class findpw extends AppCompatActivity {
 
                             if (E.equals(em)){
                                 Toast.makeText(getApplicationContext(),"비밀번호는 "+password+" 입니다.",Toast.LENGTH_SHORT).show();
+                                DB4.child("/Sit/email1").removeValue();
+                                DB4.child("/Sit/email2").removeValue();
+                                DB4.child("/Sit/email3").removeValue();
                                 findpw.super.onBackPressed();
                                 return;
                             }
-                        }DB4.child("/Sit/email3").setValue("No");
+                        }
+                        DB4.child("/Sit/email3").setValue("No");
+                        SystemClock.sleep(1);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -101,6 +115,7 @@ public class findpw extends AppCompatActivity {
                 DB4.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //SystemClock.sleep(1);
                         int i=0;
                         for (DataSnapshot DB : dataSnapshot.getChildren()){
                             String e1 = (String)DB.child("email1").getValue();
@@ -110,11 +125,10 @@ public class findpw extends AppCompatActivity {
                             if ("No".equals(e1)) ++i;
                             if ("No".equals(e2)) ++i;
                             if ("No".equals(e3)) ++i;
+
                         }
+                        //SystemClock.sleep(10);
                         if (i==3) Toast.makeText(getApplicationContext(),"일치하는 이메일이 없습니다.",Toast.LENGTH_SHORT).show();
-                        DB4.child("/Sit/email1").removeValue();
-                        DB4.child("/Sit/email2").removeValue();
-                        DB4.child("/Sit/email3").removeValue();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
