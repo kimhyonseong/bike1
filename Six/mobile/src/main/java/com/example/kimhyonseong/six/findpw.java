@@ -115,7 +115,6 @@ public class findpw extends AppCompatActivity {
                 DB4.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //SystemClock.sleep(1);
                         int i=0;
                         for (DataSnapshot DB : dataSnapshot.getChildren()){
                             String e1 = (String)DB.child("email1").getValue();
@@ -125,9 +124,7 @@ public class findpw extends AppCompatActivity {
                             if ("No".equals(e1)) ++i;
                             if ("No".equals(e2)) ++i;
                             if ("No".equals(e3)) ++i;
-
                         }
-                        //SystemClock.sleep(10);
                         if (i==3) Toast.makeText(getApplicationContext(),"일치하는 이메일이 없습니다.",Toast.LENGTH_SHORT).show();
                     }
                     @Override
