@@ -1,11 +1,25 @@
 package com.example.kimhyonseong.six;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.ImageFormat;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCaptureSession;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.CaptureResult;
+import android.hardware.camera2.TotalCaptureResult;
+import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.ImageReader;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.things.pio.PeripheralManager;
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +31,7 @@ import com.google.android.things.pio.Gpio;
 
 import java.io.IOException;
 
-public class Threadtest extends Activity {
+public class FourStepMotor extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +51,12 @@ public class Threadtest extends Activity {
         Motor2 m2 = new Motor2();
         Motor3 m3 = new Motor3();
 
+
         body.start();
         m1.start();
         m2.start();
         m3.start();
+
     }
 }
 
@@ -479,3 +495,4 @@ class Motor3 extends Thread {  //3번 모터
         });
     }
 }
+

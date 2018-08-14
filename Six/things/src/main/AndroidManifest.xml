@@ -3,10 +3,13 @@
     package="com.example.kimhyonseong.six">
     <uses-permission android:name="com.google.android.things.permission.USE_PERIPHERAL_IO" />    <!--이거랑-->
     <uses-permission android:name="com.google.android.things.permission.MANAGE_INPUT_DRIVERS" />   <!--이거 있어야 핀 설정 가능-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
     <application>
         <uses-library android:name="com.google.android.things" />
 
-        <activity android:name=".Threadtest" android:required="false">
+        <activity android:name=".FourStepMotor" android:required="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -14,7 +17,9 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.IOT_LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
