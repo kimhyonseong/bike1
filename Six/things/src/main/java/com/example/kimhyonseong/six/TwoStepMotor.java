@@ -16,18 +16,43 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 
 public class TwoStepMotor extends Activity{
+
+    private PeripheralManager manager = PeripheralManager.getInstance();
+    private Gpio step , dir;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Mot1 M1 = new Mot1();
-        Mot2 M2 = new Mot2();
-        Mot3 M3 = new Mot3();
+//        Mot1 M1 = new Mot1();
+  //      Mot2 M2 = new Mot2();
+  //      Mot3 M3 = new Mot3();
 
-        M1.run();
-        M2.run();
-        M3.run();
+    //    M1.run();
+      //  M2.run();
+        //M3.run();
+
+        try {
+            step = manager.openGpio("BCM10");
+            step.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+            step.setActiveType(Gpio.ACTIVE_HIGH);
+            step.setValue(false);
+
+            dir = manager.openGpio("BCM9");
+            dir.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+            dir.setActiveType(Gpio.ACTIVE_HIGH);
+            dir.setValue(false);      //반시계방향
+
+            for (int i=0; i<1000; i++){
+                step.setValue(true);
+                SystemClock.sleep(1);
+            }
+            step.close();
+            dir.close();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
 class Mot1 extends Thread {
