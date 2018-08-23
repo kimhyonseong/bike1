@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,6 +23,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -35,6 +39,7 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
     private Marker mylocattion,bike;
     FirebaseDatabase Fbase = FirebaseDatabase.getInstance();
     DatabaseReference DB4 = Fbase.getReference("kim");
+    //LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +49,7 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @SuppressLint("MissingPermission")
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                //Log.d(TAG, "GoogleMap is ready.");
-
-                mMap = googleMap;
-                mMap.setMyLocationEnabled(true);
-            }
-        });*/
+        ImageButton button = findViewById(R.id.button1);
 
         try {
             MapsInitializer.initialize(this);
@@ -62,20 +57,22 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
 
-        Button button = findViewById(R.id.button1);
-        button.setOnClickListener(new View.OnClickListener() {
+        //requestMyLocation(); //상시 내 위치 알리기
+
+        button.setOnClickListener(new View.OnClickListener() {  //버튼 누르면 내 위치로 감
             @Override
             public void onClick(View v) {
                 requestMyLocation();
             }
         });
+
     }
 
     private void requestMyLocation() {
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         try {
-            long minTime = 10000;
+            long minTime = 5000;
             float minDistance = 0;
             manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,
                     new LocationListener() {
@@ -112,8 +109,6 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
                         public void onProviderDisabled(String provider) { }
                     }
             );
-
-
         } catch(SecurityException e) {
             e.printStackTrace();
         }
@@ -133,39 +128,6 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
         mylocattion.showInfoWindow();
     }
 
-/*    private void showMyLocationMarker(Location location) {
-        if (mylocattion == null) {
-            mylocattion = new MarkerOptions();
-            mylocattion.position(new LatLng(location.getLatitude(), location.getLongitude()));
-            mylocattion.title("내 위치\n");
-            mylocattion.snippet("GPS 확인");
-            //myLocationMarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation));
-            mMap.addMarker(mylocattion);
-        } else {
-            mylocattion.position(new LatLng(location.getLatitude(), location.getLongitude()));
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mMap != null) {
-            mMap.setMyLocationEnabled(false);
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mMap != null) {
-            mMap.setMyLocationEnabled(true);
-        }
-    }
-*/
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -222,9 +184,12 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                return false;
+                //Toast.makeText(getApplicationContext(),marker.getTitle(),Toast.LENGTH_SHORT).show();
+                if (marker.getTitle().equals("자전거보관소")) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+                return true;
             }
         });
     }
