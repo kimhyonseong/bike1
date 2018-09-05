@@ -41,6 +41,25 @@ public class newGetback extends AppCompatActivity {
         final RadioButton Two = findViewById(R.id.two);
         final RadioButton Three = findViewById(R.id.three);
 
+        DB4.addValueEventListener(new ValueEventListener() {   //비활성화를 위한 소스
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot DB : dataSnapshot.getChildren()){
+                    String lock1 = (String) DB.child("num1").getValue();
+                    String lock2 = (String) DB.child("num2").getValue();
+                    String lock3 = (String) DB.child("num3").getValue();
+
+                    if ("open".equals(lock1)) One.setEnabled(false);
+                    if ("open".equals(lock2)) Two.setEnabled(false);
+                    if ("open".equals(lock3)) Three.setEnabled(false);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         findpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +84,8 @@ public class newGetback extends AppCompatActivity {
 
                     if (password.isEmpty()) {
                         Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
-                    } else if (number.equals("1")) {
+                    }
+                    else if (number.equals("1")) {
                         DB1.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -78,8 +98,7 @@ public class newGetback extends AppCompatActivity {
                                         DB1.child("user1").child("password").removeValue();
                                         DB1.child("/user1/E-mail").removeValue();
                                         DB4.child("/Sit/num1").setValue("open");
-                                        Intent main = new Intent(getApplicationContext(), MapsActivity4.class);
-                                        startActivity(main);
+                                        onBackPressed();
                                         finish();
                                         return;
                                     }
@@ -92,7 +111,8 @@ public class newGetback extends AppCompatActivity {
 
                             }
                         });
-                    } else if (number.equals("2")) {
+                    }
+                    else if (number.equals("2")) {
                         DB2.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,8 +125,7 @@ public class newGetback extends AppCompatActivity {
                                         DB2.child("/banana/password").removeValue();
                                         DB2.child("/banana/E-mail").removeValue();
                                         DB4.child("/Sit/num2").setValue("open");
-                                        Intent main = new Intent(getApplicationContext(), MapsActivity4.class);
-                                        startActivity(main);
+                                        onBackPressed();
                                         finish();
                                         return;
                                     }
@@ -119,7 +138,8 @@ public class newGetback extends AppCompatActivity {
 
                             }
                         });
-                    } else if (number.equals("3")) {
+                    }
+                    else if (number.equals("3")) {
                         DB3.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,8 +153,7 @@ public class newGetback extends AppCompatActivity {
                                         DB3.child("/tost/password").removeValue();
                                         DB3.child("/tost/E-mail").removeValue();
                                         DB4.child("/Sit/num3").setValue("open");
-                                        Intent main = new Intent(getApplicationContext(), MapsActivity4.class);
-                                        startActivity(main);
+                                        onBackPressed();
                                         finish();
                                         return;
                                     }

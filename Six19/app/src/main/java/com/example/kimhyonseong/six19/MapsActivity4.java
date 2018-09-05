@@ -36,7 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallback
 {
     private GoogleMap mMap;
-    private Marker mylocattion,bike;
+    private Marker mylocattion;
     FirebaseDatabase Fbase = FirebaseDatabase.getInstance();
     DatabaseReference DB4 = Fbase.getReference("kim");
     //LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -185,7 +185,7 @@ public class MapsActivity4 extends FragmentActivity implements OnMapReadyCallbac
             @Override
             public boolean onMarkerClick(Marker marker) {
                 //Toast.makeText(getApplicationContext(),marker.getTitle(),Toast.LENGTH_SHORT).show();
-                if (marker.getTitle().equals("자전거보관소")) {
+                if (marker.getTitle().equals("자전거 보관소")) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }

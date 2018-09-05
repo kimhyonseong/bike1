@@ -109,8 +109,7 @@ public class entrust extends AppCompatActivity {
                             DB1.child("user1").child("E-mail").setValue(email);
                             DB4.child("/Sit/num1").setValue("lock");
                             Toast.makeText(getApplicationContext(), "자전거가 보관되었습니다.", Toast.LENGTH_SHORT).show();
-                            Intent main = new Intent(getApplicationContext(), MapsActivity4.class);
-                            startActivity(main);
+                            onBackPressed();
                             finish();
                         } else if (number.equals("2")) {
                             DB2.child("banana").child("state").setValue("lock");
@@ -118,8 +117,7 @@ public class entrust extends AppCompatActivity {
                             DB2.child("banana").child("E-mail").setValue(email);
                             DB4.child("/Sit/num2").setValue("lock");
                             Toast.makeText(getApplicationContext(), "자전거가 보관되었습니다.", Toast.LENGTH_SHORT).show();
-                            Intent main = new Intent(getApplicationContext(), MapsActivity4.class);
-                            startActivity(main);
+                            onBackPressed();
                             finish();
                         } else if (number.equals("3")) {
                             DB3.child("tost").child("state").setValue("lock");
@@ -127,8 +125,7 @@ public class entrust extends AppCompatActivity {
                             DB3.child("tost").child("E-mail").setValue(email);
                             DB4.child("/Sit/num3").setValue("lock");
                             Toast.makeText(getApplicationContext(), "자전거가 보관되었습니다.", Toast.LENGTH_SHORT).show();
-                            Intent main = new Intent(getApplicationContext(), MapsActivity4.class);
-                            startActivity(main);
+                            onBackPressed();
                             finish();
                         }
                     }
